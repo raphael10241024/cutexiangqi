@@ -76,7 +76,7 @@ Result RacingKingsBoard::result()
 {
 	QString str;
 	bool blackFinished = finished(Side::Black);
-	bool whiteFinished = finished(Side::White);
+	bool whiteFinished = finished(Side::Red);
 
 	// Finishing on eighth rank
 	if (blackFinished && whiteFinished)
@@ -96,10 +96,10 @@ Result RacingKingsBoard::result()
 
 	// White finished but Black cannot finish or forfeited the chance
 	if (whiteFinished
-	&& ((mobile && !canFinish(Side::Black)) || side == Side::White))
+	&& ((mobile && !canFinish(Side::Black)) || side == Side::Red))
 	{
 		str = tr("White wins the race");
-		return Result(Result::Win, Side::White, str);
+		return Result(Result::Win, Side::Red, str);
 	}
 
 	// Stalemate

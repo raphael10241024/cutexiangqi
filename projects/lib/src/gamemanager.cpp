@@ -67,7 +67,7 @@ GameInitializer::GameInitializer(const PlayerBuilder* white,
 	Q_ASSERT(white != nullptr);
 	Q_ASSERT(black != nullptr);
 
-	m_builder[Chess::Side::White] = white;
+	m_builder[Chess::Side::Red] = white;
 	m_builder[Chess::Side::Black] = black;
 	m_player[0] = nullptr;
 	m_player[1] = nullptr;
@@ -87,7 +87,7 @@ GameInitializer::~GameInitializer()
 
 const PlayerBuilder* GameInitializer::whiteBuilder() const
 {
-	return m_builder[Chess::Side::White];
+	return m_builder[Chess::Side::Red];
 }
 
 const PlayerBuilder* GameInitializer::blackBuilder() const

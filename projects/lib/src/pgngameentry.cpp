@@ -168,7 +168,7 @@ bool PgnGameEntry::match(const PgnGameFilter& filter) const
 
 				if (filter.playerSide() != Chess::Side::Black)
 					len1 = s_stringContains(str, filter.player(), size);
-				if (filter.playerSide() != Chess::Side::White)
+				if (filter.playerSide() != Chess::Side::Red)
 					len2 = s_stringContains(str, filter.opponent(), size);
 
 				if (len1 == -1 && len2 == -1)
@@ -181,7 +181,7 @@ bool PgnGameEntry::match(const PgnGameFilter& filter) const
 				int len1 = -1;
 				int len2 = -1;
 
-				if (filter.playerSide() != Chess::Side::White && whitePlayer != 1)
+				if (filter.playerSide() != Chess::Side::Red && whitePlayer != 1)
 					len1 = s_stringContains(str, filter.player(), size);
 				if (filter.playerSide() != Chess::Side::Black && whitePlayer != 2)
 					len2 = s_stringContains(str, filter.opponent(), size);
@@ -204,7 +204,7 @@ bool PgnGameEntry::match(const PgnGameFilter& filter) const
 					winner = result.winner() + 1;
 				else
 				{
-					if (result.winner() == Chess::Side::White)
+					if (result.winner() == Chess::Side::Red)
 						winner = 2;
 					else
 						winner = 1;
@@ -218,7 +218,7 @@ bool PgnGameEntry::match(const PgnGameFilter& filter) const
 				ok = !result.winner().isNull();
 				break;
 			case PgnGameFilter::WhiteWins:
-				ok = result.winner() == Chess::Side::White;
+				ok = result.winner() == Chess::Side::Red;
 				break;
 			case PgnGameFilter::BlackWins:
 				ok = result.winner() == Chess::Side::Black;

@@ -36,6 +36,8 @@ GameSettingsWidget::GameSettingsWidget(QWidget *parent)
 {
 	ui->setupUi(this);
 
+    auto variants = Chess::BoardFactory::variants();
+
 	ui->m_variantCombo->addItems(Chess::BoardFactory::variants());
 	connect(ui->m_variantCombo, SIGNAL(currentIndexChanged(QString)),
 		this, SIGNAL(variantChanged(QString)));

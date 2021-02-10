@@ -56,8 +56,8 @@ Board::Board(Zobrist* zobrist)
 	: m_initialized(false),
 	  m_width(0),
 	  m_height(0),
-	  m_side(Side::White),
-	  m_startingSide(Side::White),
+	  m_side(Side::Red),
+	  m_startingSide(Side::Red),
 	  m_maxPieceSymbolLength(1),
 	  m_key(0),
 	  m_zobrist(zobrist),
@@ -99,7 +99,7 @@ Board::CoordinateSystem Board::coordinateSystem() const
 
 Side Board::upperCaseSide() const
 {
-	return Side::White;
+	return Side::Red;
 }
 
 Piece Board::pieceAt(const Square& square) const
@@ -485,7 +485,7 @@ QString Board::fenString(FenNotation notation) const
 	if (variantHasDrops())
 	{
 		QString str;
-		for (i = Side::White; i <= Side::Black; i++)
+		for (i = Side::Red; i <= Side::Black; i++)
 		{
 			Side side = Side::Type(i);
 			for (int j = m_reserve[i].size() - 1; j >= 1; j--)
@@ -620,7 +620,7 @@ bool Board::setFenString(const QString& fen)
 		return false;
 
 	// Hand pieces
-	m_reserve[Side::White].clear();
+	m_reserve[Side::Red].clear();
 	m_reserve[Side::Black].clear();
 	if (handPieceIndex != -1)
 	{
@@ -668,7 +668,7 @@ bool Board::setFenString(const QString& fen)
 	if (!vSetFenString(strList))
 		return false;
 
-	if (m_side == Side::White)
+	if (m_side == Side::Red)
 		xorKey(m_zobrist->side());
 
 	if (!isLegalPosition())

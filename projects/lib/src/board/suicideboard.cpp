@@ -37,13 +37,13 @@ QString SuicideBoard::variant() const
 
 Result SuicideBoard::vResultOfStalemate() const
 {
-	int pcwhite = pieceCount(Side::White);
+	int pcwhite = pieceCount(Side::Red);
 	int pcblack = pieceCount(Side::Black);
 
 	if (pcwhite == pcblack)
 		return Result(Result::Draw, Side::NoSide, tr("Draw"));
 
-	Side winner = pcwhite < pcblack ? Side::White : Side::Black;
+	Side winner = pcwhite < pcblack ? Side::Red : Side::Black;
 	QString str { tr("%1 wins").arg(winner.toString()) };
 
 	return Result(Result::Win, winner, str);

@@ -47,7 +47,7 @@ void ChigorinBoard::addPromotions(int sourceSquare, int targetSquare, QVarLength
 {
 	Side side = sideToMove();
 
-	if (side == Side::White)
+	if (side == Side::Red)
 	{
 		moves.append(Move(sourceSquare, targetSquare, Knight));
 		moves.append(Move(sourceSquare, targetSquare, Rook));

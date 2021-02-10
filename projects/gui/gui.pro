@@ -1,7 +1,7 @@
 macx {
-    TARGET = "Cute Chess"
+    TARGET = "Cute Xiangqi"
 } else {
-    TARGET = cutechess
+    TARGET = cutexiangqi
 }
 
 DESTDIR = $$PWD
@@ -9,15 +9,15 @@ DESTDIR = $$PWD
 include(../lib/lib.pri)
 include(../lib/libexport.pri)
 
-CUTECHESS_VERSION = 1.2.0
+CUTEXIANGQI_VERSION = 1.2.0
 
 macx-xcode {
-    DEFINES += CUTECHESS_VERSION=\"$$CUTECHESS_VERSION\"
+    DEFINES += CUTEXIANGQI_VERSION=\"$$CUTEXIANGQI_VERSION\"
 }else {
     OBJECTS_DIR = .obj/
     MOC_DIR = .moc/
     RCC_DIR = .rcc/
-    DEFINES += CUTECHESS_VERSION=\\\"$$CUTECHESS_VERSION\\\"
+    DEFINES += CUTEXIANGQI_VERSION=\\\"$$CUTEXIANGQI_VERSION\\\"
 }
 
 QT += svg widgets concurrent printsupport
@@ -34,7 +34,7 @@ win32 {
 }
 
 macx {
-    ICON = res/icons/cutechess_mac.icns
+    ICON = res/icons/cutexiangqi_mac.icns
 }
 
 UI_HEADERS_DIR = src

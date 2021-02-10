@@ -58,7 +58,7 @@ bool SittuyinBoard::variantHasDrops() const
 QList< Piece > SittuyinBoard::reservePieceTypes() const
 {
 	QList< Piece > types;
-	for (Side side: { Side::White, Side::Black} )
+	for (Side side: { Side::Red, Side::Black} )
 	{
 		for (int type = Knight; type <= King; type++)
 			types << Piece(side, type);
@@ -73,7 +73,7 @@ MakrukBoard::CountingRules SittuyinBoard::countingRules() const
 
 bool SittuyinBoard::kingsCountAssertion(int whiteKings, int blackKings) const
 {
-	Piece whiteKing(Side::White, King);
+	Piece whiteKing(Side::Red, King);
 	Piece blackKing(Side::Black, King);
 	return whiteKings + reserveCount(whiteKing) == 1 && blackKings + reserveCount(blackKing) == 1;
 }
@@ -107,7 +107,7 @@ void SittuyinBoard::generatePawnMoves(int square,
 	Square sq = chessSquare(square);
 	int file = sq.file();
 	int rank = sq.rank();
-	int rrank = (side == Side::White) ? rank : height() - 1 - rank;
+	int rrank = (side == Side::Red) ? rank : height() - 1 - rank;
 
 	// Must promote from promotion rank (except the last pawn)
 	if (rrank != promotionRank(file)

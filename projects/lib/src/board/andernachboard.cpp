@@ -56,7 +56,7 @@ QString AndernachBoard::sanMoveString(const Move& move)
 	int promotion = move.promotion();
 	int type = (promotion == Piece::NoPiece) ? pc.type() : promotion;
 	Piece piece(pc.side(), type);
-	QString color = (piece.side() == Side::White) ? "b" : "w";
+	QString color = (piece.side() == Side::Red) ? "b" : "w";
 	QString a = "(=" + color + pieceSymbol(piece).toUpper() + ")";
 
 	return WesternBoard::sanMoveString(move) + a;

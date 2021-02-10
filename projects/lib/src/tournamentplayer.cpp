@@ -128,19 +128,19 @@ void TournamentPlayer::addScore(Chess::Side side, int score)
 	case 0:
 		m_losses++;
 
-		if (side == Chess::Side::White)
+		if (side == Chess::Side::Red)
 			m_whiteLosses++;
 		break;
 	case 1:
 		m_draws++;
 
-		if (side == Chess::Side::White)
+		if (side == Chess::Side::Red)
 			m_whiteDraws++;
 		break;
 	case 2:
 		m_wins++;
 
-		if (side == Chess::Side::White)
+		if (side == Chess::Side::Red)
 			m_whiteWins++;
 		break;
 	default:

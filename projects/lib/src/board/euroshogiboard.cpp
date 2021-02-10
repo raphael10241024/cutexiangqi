@@ -65,11 +65,11 @@ void EuroShogiBoard::vInitialize()
 	ShogiBoard::vInitialize();
 
 	int arwidth = width() + 2;
-	m_knightOffsets[Side::White].resize(4);
-	m_knightOffsets[Side::White][0] = -2 * arwidth - 1;
-	m_knightOffsets[Side::White][1] = -2 * arwidth + 1;
-	m_knightOffsets[Side::White][2] = -1;
-	m_knightOffsets[Side::White][3] =  1;
+	m_knightOffsets[Side::Red].resize(4);
+	m_knightOffsets[Side::Red][0] = -2 * arwidth - 1;
+	m_knightOffsets[Side::Red][1] = -2 * arwidth + 1;
+	m_knightOffsets[Side::Red][2] = -1;
+	m_knightOffsets[Side::Red][3] =  1;
 
 	m_knightOffsets[Side::Black].resize(4);
 	m_knightOffsets[Side::Black][0] =  2 * arwidth + 1;
@@ -114,7 +114,7 @@ void EuroShogiBoard::generateMovesForPiece(QVarLengthArray< Chess::Move >& moves
 
 		int target = m.targetSquare();
 		int rank = chessSquare(target).rank();
-		int rrank = (sideToMove() == Side::White) ? rank : height() - 1 - rank;
+		int rrank = (sideToMove() == Side::Red) ? rank : height() - 1 - rank;
 
 		if (rrank >= promotionRank())
 			moves.append(Move(square, m.targetSquare(), PromotedKnight));

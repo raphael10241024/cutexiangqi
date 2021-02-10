@@ -139,7 +139,7 @@ void XboardEngine::startGame()
 				 qUtf8Printable(name()));
 			write("edit");
 			write("#"); // clear board on engine
-			const QStringList& whitePieces = board()->pieceList(Chess::Side::White);
+            const QStringList& whitePieces = board()->pieceList(Chess::Side::Red);
 			for (const auto& s: whitePieces)
 				write(s); // set a piece
 			write("c");
@@ -626,7 +626,7 @@ void XboardEngine::parseLine(const QString& line)
 							  Chess::Side::NoSide,
 							  description));
 		}
-		else if ((command == "1-0" && side() == Chess::Side::White)
+        else if ((command == "1-0" && side() == Chess::Side::Red)
 		     ||  (command == "0-1" && side() == Chess::Side::Black))
 			claimResult(Chess::Result(Chess::Result::Win,
 						  side(),

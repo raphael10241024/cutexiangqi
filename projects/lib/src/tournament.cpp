@@ -388,10 +388,10 @@ void Tournament::startGame(TournamentPair* pair)
 	connect(game, SIGNAL(finished(ChessGame*)),
 		this, SLOT(onGameFinished(ChessGame*)));
 
-	game->setTimeControl(white.timeControl(), Chess::Side::White);
+	game->setTimeControl(white.timeControl(), Chess::Side::Red);
 	game->setTimeControl(black.timeControl(), Chess::Side::Black);
 
-	game->setOpeningBook(white.book(), Chess::Side::White, white.bookDepth());
+	game->setOpeningBook(white.book(), Chess::Side::Red, white.bookDepth());
 	game->setOpeningBook(black.book(), Chess::Side::Black, black.bookDepth());
 
 	if (!m_startFen.isEmpty() || !m_openingMoves.isEmpty())
@@ -472,7 +472,7 @@ void Tournament::onGameAboutToStart(ChessGame *game,
 int Tournament::playerIndex(ChessGame* game, Chess::Side side) const
 {
 	auto gd = m_gameData[game];
-	return side == Chess::Side::White ? gd->whiteIndex : gd->blackIndex;
+	return side == Chess::Side::Red ? gd->whiteIndex : gd->blackIndex;
 }
 
 void Tournament::startNextGame()
@@ -612,7 +612,7 @@ void Tournament::onGameStarted(ChessGame* game)
 	GameData* data = m_gameData[game];
 	int iWhite = data->whiteIndex;
 	int iBlack = data->blackIndex;
-	m_players[iWhite].setName(game->player(Chess::Side::White)->name());
+	m_players[iWhite].setName(game->player(Chess::Side::Red)->name());
 	m_players[iBlack].setName(game->player(Chess::Side::Black)->name());
 
 	emit gameStarted(game, data->number, iWhite, iBlack);
@@ -633,7 +633,7 @@ void Tournament::onGameFinished(ChessGame* game)
 
 	int iWhite = data->whiteIndex;
 	int iBlack = data->blackIndex;
-	const auto whiteName = pgn->playerName(Chess::Side::White);
+	const auto whiteName = pgn->playerName(Chess::Side::Red);
 	if (!whiteName.isEmpty())
 		m_players[iWhite].setName(whiteName);
 	const auto blackName = pgn->playerName(Chess::Side::Black);
@@ -642,20 +642,20 @@ void Tournament::onGameFinished(ChessGame* game)
 
 	switch (game->result().winner())
 	{
-	case Chess::Side::White:
-		addScore(iWhite, Chess::Side::White, 2);
+	case Chess::Side::Red:
+		addScore(iWhite, Chess::Side::Red, 2);
 		addScore(iBlack, Chess::Side::Black, 0);
 		sprtResult = (iWhite == 0) ? Sprt::Win : Sprt::Loss;
 		break;
 	case Chess::Side::Black:
 		addScore(iBlack, Chess::Side::Black, 2);
-		addScore(iWhite, Chess::Side::White, 0);
+		addScore(iWhite, Chess::Side::Red, 0);
 		sprtResult = (iBlack == 0) ? Sprt::Win : Sprt::Loss;
 		break;
 	default:
 		if (game->result().isDraw())
 		{
-			addScore(iWhite,  Chess::Side::White, 1);
+			addScore(iWhite,  Chess::Side::Red, 1);
 			addScore(iBlack,  Chess::Side::Black, 1);
 			sprtResult = Sprt::Draw;
 		}

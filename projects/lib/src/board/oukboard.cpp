@@ -66,9 +66,9 @@ QString OukBoard::vFenString(Board::FenNotation notation) const
 
 	// Set castling rights string
 	QString castlingStr;
-	if (m_moveCount[Side::White][King] == 0)
+	if (m_moveCount[Side::Red][King] == 0)
 		  castlingStr.append('D');
-	if (m_moveCount[Side::White][Maiden] == 0)
+	if (m_moveCount[Side::Red][Maiden] == 0)
 		  castlingStr.append('E');
 	if (m_moveCount[Side::Black][Maiden] == 0)
 		  castlingStr.append('d');
@@ -96,9 +96,9 @@ bool OukBoard::parseCastlingRights(QChar c)
 
 	// Enable initial moves by clearing matching move count
 	if (c == 'D')
-		m_moveCount[Side::White][King] = 0;
+		m_moveCount[Side::Red][King] = 0;
 	else if (c == 'E')
-		m_moveCount[Side::White][Maiden] = 0;
+		m_moveCount[Side::Red][Maiden] = 0;
 	else if (c == 'd')
 		m_moveCount[Side::Black][Maiden] = 0;
 	else if (c == 'e')
@@ -110,9 +110,9 @@ bool OukBoard::parseCastlingRights(QChar c)
 bool OukBoard::vSetFenString(const QStringList& fen)
 {
 	// At first assume that King and Maiden pieces have moved
-	m_moveCount[Side::White][King] = 1;
+	m_moveCount[Side::Red][King] = 1;
 	m_moveCount[Side::Black][King] = 1;
-	m_moveCount[Side::White][Maiden] = 1;
+	m_moveCount[Side::Red][Maiden] = 1;
 	m_moveCount[Side::Black][Maiden] = 1;
 
 	// parseCastlingRights is called via vSetFenString of base class
@@ -121,7 +121,7 @@ bool OukBoard::vSetFenString(const QStringList& fen)
 
 	// Expect pieces on their initial squares if move counter is zero
 	const OukPieceType types[2]{King, Maiden};
-	for (int side = Side::White; side <= Side::Black; side++)
+	for (int side = Side::Red; side <= Side::Black; side++)
 	{
 		for (auto type: types)
 		{
@@ -155,7 +155,7 @@ void OukBoard::generateMovesForPiece(QVarLengthArray< Move >& moves,
 
 	// Generate initial move option for King (leap of Horse)
 	// and for Neang (forward two squares)
-	int sign = (side == Side::White) ? 1 : -1;
+	int sign = (side == Side::Red) ? 1 : -1;
 
 	for (const auto& i: m_initialOffsets)
 	{
@@ -173,7 +173,7 @@ void OukBoard::generateMovesForPiece(QVarLengthArray< Move >& moves,
 
 bool OukBoard::inCheck(Side side, int square) const
 {
-	int sign = (side == Side::White) ? 1 : -1;
+	int sign = (side == Side::Red) ? 1 : -1;
 	Side opSide = side.opposite();
 	if (square == 0)
 		square = kingSquare(side);

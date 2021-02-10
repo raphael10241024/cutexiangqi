@@ -53,10 +53,10 @@ bool ThreeKingsBoard::inCheck(Side, int) const
 
 Result ThreeKingsBoard::result()
 {
-	if (kingCount(Side::White) > kingCount(Side::Black))
-		return Result(Result::Win, Side::White,
+	if (kingCount(Side::Red) > kingCount(Side::Black))
+		return Result(Result::Win, Side::Red,
 			      tr("White wins"));
-	if (kingCount(Side::Black) > kingCount(Side::White))
+	if (kingCount(Side::Black) > kingCount(Side::Red))
 		return Result(Result::Win, Side::Black,
 			      tr("Black wins"));
 	return WesternBoard::result();

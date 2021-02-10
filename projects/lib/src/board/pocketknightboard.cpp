@@ -35,7 +35,7 @@ QList< Piece > PocketKnightBoard::reservePieceTypes() const
 {
 	QList<Piece> list;
 
-	list << Piece(Side::White, Knight);
+	list << Piece(Side::Red, Knight);
 	list << Piece(Side::Black, Knight);
 
 	return list;

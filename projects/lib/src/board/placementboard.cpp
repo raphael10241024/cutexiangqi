@@ -51,7 +51,7 @@ bool PlacementBoard::variantHasDrops() const
 QList< Piece > PlacementBoard::reservePieceTypes() const
 {
 	QList< Piece > types;
-	for (Side side: { Side::White, Side::Black} )
+	for (Side side: { Side::Red, Side::Black} )
 	{
 		for (int type = Knight; type <= King; type++)
 			types << Piece(side, type);
@@ -61,7 +61,7 @@ QList< Piece > PlacementBoard::reservePieceTypes() const
 
 bool PlacementBoard::kingsCountAssertion(int whiteKings, int blackKings) const
 {
-	Piece whiteKing(Side::White, King);
+	Piece whiteKing(Side::Red, King);
 	Piece blackKing(Side::Black, King);
 	return whiteKings + reserveCount(whiteKing) == 1 && blackKings + reserveCount(blackKing) == 1;
 }
@@ -190,7 +190,7 @@ void PlacementBoard::setCastlingRights()
 		parseCastlingRights(c);
 
 	// only support orthodox castling
-	const Side sides[2]{Side::White, Side::Black};
+	const Side sides[2]{Side::Red, Side::Black};
 	for (const Side side: sides)
 	{
 		int ksq = kingSquare(side);
@@ -206,7 +206,7 @@ Result PlacementBoard::result()
 
 	if (m_inSetUp && !m_previouslyInSetUp)
 	{
-	      removeCastlingRights(Side::White);
+	      removeCastlingRights(Side::Red);
 	      removeCastlingRights(Side::Black);
 	}
 	m_previouslyInSetUp = m_inSetUp;

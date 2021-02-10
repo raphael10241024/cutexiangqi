@@ -107,7 +107,7 @@ void EngineMatch::onGameStarted(ChessGame* game, int number)
 	qInfo("Started game %d of %d (%s vs %s)",
 	      number,
 	      m_tournament->finalGameCount(),
-	      qUtf8Printable(game->player(Chess::Side::White)->name()),
+	      qUtf8Printable(game->player(Chess::Side::Red)->name()),
 	      qUtf8Printable(game->player(Chess::Side::Black)->name()));
 }
 
@@ -118,7 +118,7 @@ void EngineMatch::onGameFinished(ChessGame* game, int number)
 	Chess::Result result(game->result());
 	qInfo("Finished game %d (%s vs %s): %s",
 	      number,
-	      qUtf8Printable(game->player(Chess::Side::White)->name()),
+	      qUtf8Printable(game->player(Chess::Side::Red)->name()),
 	      qUtf8Printable(game->player(Chess::Side::Black)->name()),
 	      qUtf8Printable(result.toVerboseString()));
 

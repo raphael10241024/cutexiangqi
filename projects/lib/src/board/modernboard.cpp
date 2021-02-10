@@ -80,15 +80,15 @@ QString ModernBoard::sanMoveString(const Move& move)
 
 	Side side = pieceAt(move.sourceSquare()).side();
 	if (str.startsWith("O-O-O"))
-		return side == Side::White ? "O-M-O" + r: "O-Q-O" + r;
+		return side == Side::Red ? "O-M-O" + r: "O-Q-O" + r;
 	else
-		return side == Side::White ? "O-Q-O" + r: "O-M-O" + r;
+		return side == Side::Red ? "O-Q-O" + r: "O-M-O" + r;
 }
 
 // This method accepts Modern Chess notation for castling and also standard chess notation. 
 Move ModernBoard::moveFromSanString(const QString& str)
 {
-	bool isWhite = (sideToMove() == Side::White);
+	bool isWhite = (sideToMove() == Side::Red);
 	if (str.startsWith("O-M-O"))
 		return WesternBoard::moveFromSanString(isWhite ? "O-O-O":"O-O");
 	if (str.startsWith("O-Q-O"))

@@ -84,7 +84,7 @@ NewGameDialog::NewGameDialog(EngineManager* engineManager, QWidget* parent)
 	connect(ui->m_whitePlayerCpuRadio, &QRadioButton::toggled, [=](bool checked)
 	{
 		auto type = checked ? CPU : Human;
-		setPlayerType(Chess::Side::White, type);
+		setPlayerType(Chess::Side::Red, type);
 	});
 	connect(ui->m_blackPlayerCpuRadio, &QRadioButton::toggled, [=](bool checked)
 	{
@@ -162,7 +162,7 @@ PlayerBuilder* NewGameDialog::createPlayerBuilder(Chess::Side side) const
 
 void NewGameDialog::setPlayerType(Chess::Side side, PlayerType type)
 {
-	if (side == Chess::Side::White)
+	if (side == Chess::Side::Red)
 	{
 		ui->m_whiteEngineComboBox->setEnabled(type == CPU);
 		ui->m_configureWhiteEngineButton->setEnabled(type == CPU);
@@ -174,7 +174,7 @@ void NewGameDialog::setPlayerType(Chess::Side side, PlayerType type)
 	}
 
 	int humanCount = 0;
-	if (playerType(Chess::Side::White) == Human)
+	if (playerType(Chess::Side::Red) == Human)
 		humanCount++;
 	if (playerType(Chess::Side::Black) == Human)
 		humanCount++;
@@ -185,7 +185,7 @@ NewGameDialog::PlayerType NewGameDialog::playerType(Chess::Side side) const
 {
 	Q_ASSERT(!side.isNull());
 
-	if (side == Chess::Side::White)
+	if (side == Chess::Side::Red)
 		return (ui->m_whitePlayerHumanRadio->isChecked()) ? Human : CPU;
 	else
 		return (ui->m_blackPlayerHumanRadio->isChecked()) ? Human : CPU;
@@ -195,7 +195,7 @@ void NewGameDialog::configureEngine()
 {
 	Chess::Side side;
 	if (QObject::sender() == ui->m_configureWhiteEngineButton)
-		side = Chess::Side::White;
+		side = Chess::Side::Red;
 	else
 		side = Chess::Side::Black;
 
@@ -226,7 +226,7 @@ void NewGameDialog::onEngineChanged(int index, Chess::Side side)
 	if (side == Chess::Side::NoSide)
 	{
 		if (QObject::sender() == ui->m_whiteEngineComboBox)
-			side = Chess::Side::White;
+			side = Chess::Side::Red;
 		else
 			side = Chess::Side::Black;
 	}

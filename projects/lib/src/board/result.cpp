@@ -34,7 +34,7 @@ Result::Result(const QString& str)
 	if (str.startsWith("1-0"))
 	{
 		m_type = Win;
-		m_winner = Side::White;
+		m_winner = Side::Red;
 	}
 	else if (str.startsWith("0-1"))
 	{
@@ -168,7 +168,7 @@ QString Result::toShortString() const
 {
 	if (m_type == NoResult || m_type == ResultError)
 		return "*";
-	if (m_winner == Side::White)
+	if (m_winner == Side::Red)
 		return "1-0";
 	if (m_winner == Side::Black)
 		return "0-1";

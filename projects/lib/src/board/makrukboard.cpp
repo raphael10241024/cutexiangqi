@@ -64,9 +64,9 @@ MakrukBoard::CountingRules MakrukBoard::countingRules() const
 
 inline void rotateAndStoreOffsets(QVarLengthArray<int> a[2])
 {
-	a[Side::Black].resize(a[Side::White].size());
-	for (int i = 0; i < a[Side::White].count(); i++)
-		a[Side::Black][i] = -a[Side::White][i];
+	a[Side::Black].resize(a[Side::Red].size());
+	for (int i = 0; i < a[Side::Red].count(); i++)
+		a[Side::Black][i] = -a[Side::Red][i];
 }
 
 void MakrukBoard::initHistory()
@@ -89,12 +89,12 @@ void MakrukBoard::vInitialize()
 	 * symmetric movement, so offsets are different for White and Black
 	 */
 	int arwidth = width() + 2;
-	m_silverGeneralOffsets[Side::White].resize(5);
-	m_silverGeneralOffsets[Side::White][0] = -arwidth - 1;
-	m_silverGeneralOffsets[Side::White][1] = -arwidth + 1;
-	m_silverGeneralOffsets[Side::White][2] = arwidth - 1;
-	m_silverGeneralOffsets[Side::White][3] = arwidth + 1;
-	m_silverGeneralOffsets[Side::White][4] = -arwidth;
+	m_silverGeneralOffsets[Side::Red].resize(5);
+	m_silverGeneralOffsets[Side::Red][0] = -arwidth - 1;
+	m_silverGeneralOffsets[Side::Red][1] = -arwidth + 1;
+	m_silverGeneralOffsets[Side::Red][2] = arwidth - 1;
+	m_silverGeneralOffsets[Side::Red][3] = arwidth + 1;
+	m_silverGeneralOffsets[Side::Red][4] = -arwidth;
 
 	rotateAndStoreOffsets(m_silverGeneralOffsets);
 }
@@ -130,7 +130,7 @@ void MakrukBoard::generatePawnMoves(int square,
 	for (const Move& m: moves1)
 	{
 		int rank = height() + 1 - m.targetSquare() / arwidth;
-		int rrank = (side == Side::White) ? rank : height() - 1 - rank;
+		int rrank = (side == Side::Red) ? rank : height() - 1 - rank;
 
 		if (rrank < m_promotionRank)
 			moves.append(m);
@@ -319,7 +319,7 @@ bool MakrukBoard::vSetFenString(const QStringList& inputFen)
 
 	// Reconstruction of md.piecesHonour, see vMakeMove
 	bool noPawns = (0 == pieceCount(Side::NoSide, Bia));
-	if ((pieceCount(Side::White) < 2 || pieceCount(Side::Black) < 2)
+	if ((pieceCount(Side::Red) < 2 || pieceCount(Side::Black) < 2)
 	&&  (m_rules == BareKing || noPawns))
 	{
 		md.piecesHonour = true;
@@ -388,7 +388,7 @@ int MakrukBoard::pieceCount(Side side, int pieceType) const
 {
 	const MoveData & md = m_history.last();
 	if (side == Side::NoSide)
-		return md.pieceCount[pieceType][Side::White]
+		return md.pieceCount[pieceType][Side::Red]
 		     + md.pieceCount[pieceType][Side::Black];
 	else
 		return md.pieceCount[pieceType][side];

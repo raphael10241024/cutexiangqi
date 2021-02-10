@@ -65,11 +65,11 @@ void GrandBoard::generateMovesForPiece(QVarLengthArray< Move >& moves,
 
 	Side side = sideToMove();
 	Side opp = side.opposite();
-	int sign = (side == Side::White) ? 1 : -1;
+	int sign = (side == Side::Red) ? 1 : -1;
 	int rank = chessSquare(square).rank();
 
 	// add missing pawn double steps from third rank
-	int rank3 = (side == Side::White) ? 2 : height() - 3;
+	int rank3 = (side == Side::Red) ? 2 : height() - 3;
 	if (rank == rank3)
 	{
 		for (const PawnStep& pStep: m_pawnSteps)
@@ -91,7 +91,7 @@ void GrandBoard::generateMovesForPiece(QVarLengthArray< Move >& moves,
 	}
 
 	//add optional promotions on eighth and ninth ranks
-	int rank7 = (side == Side::White) ? height() - 4 : 3;
+	int rank7 = (side == Side::Red) ? height() - 4 : 3;
 	int rank8 = rank7 + sign;
 
 	if (rank != rank7 && rank != rank8)

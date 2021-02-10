@@ -113,7 +113,7 @@ void TwoKingsEachBoard::generateMovesForPiece(QVarLengthArray< Move >& moves, in
 	// castling
 	Side side = sideToMove();
 	Square sq = chessSquare(square);
-	int rrank = (side == Side::White) ? sq.rank()
+	int rrank = (side == Side::Red) ? sq.rank()
 					  : height() - 1 - sq.rank();
 	int rookSqQ = square - m_castlingSourceFile;
 	int rookSqK = rookSqQ + width() - 1;
@@ -169,7 +169,7 @@ Move TwoKingsEachBoard::moveFromSanString(const QString& str)
 
 	Side side = sideToMove();
 	int srcFile = m_castlingSourceFile;
-	int rank = (side == Side::White) ? 0 : height() - 1;
+	int rank = (side == Side::Red) ? 0 : height() - 1;
 	int tgtFile = (str.startsWith("O-O-O")) ? 0 : width() - 1;
 	Square srcSq = Square(srcFile, rank);
 	Square tgtSq = Square(tgtFile, rank);

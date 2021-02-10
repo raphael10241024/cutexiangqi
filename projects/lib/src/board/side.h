@@ -40,7 +40,7 @@ class LIB_EXPORT Side
 		/*! The enumerated type for the side. */
 		enum Type
 		{
-			White,	//!< The side with the white pieces.
+            Red,	//!< The side with the white pieces.
 			Black,	//!< The side with the black pieces.
 			NoSide	//!< No side
 		};

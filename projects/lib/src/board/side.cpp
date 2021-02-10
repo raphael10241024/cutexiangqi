@@ -23,7 +23,7 @@ namespace Chess {
 Side::Side(const QString& symbol)
 {
 	if (symbol == "w")
-		m_type = White;
+		m_type = Red;
 	else if (symbol == "b")
 		m_type = Black;
 	else
@@ -32,7 +32,7 @@ Side::Side(const QString& symbol)
 
 QString Side::symbol() const
 {
-	if (m_type == White)
+	if (m_type == Red)
 		return "w";
 	else if (m_type == Black)
 		return "b";
@@ -42,7 +42,7 @@ QString Side::symbol() const
 
 QString Side::toString() const
 {
-	if (m_type == White)
+	if (m_type == Red)
 		return tr("white");
 	else if (m_type == Black)
 		return tr("black");

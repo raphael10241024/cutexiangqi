@@ -61,7 +61,7 @@ bool SeirawanBoard::variantHasDrops() const
 bool SeirawanBoard::variantHasChanneling(Side side, int square) const
 {
 	int rank = chessSquare(square).rank();
-	int baserank = (side == Side::White) ? 0 : height() -1 ;
+	int baserank = (side == Side::Red) ? 0 : height() -1 ;
 	return  rank == baserank && !side.isNull();
 }
 
@@ -130,7 +130,7 @@ bool SeirawanBoard::parseCastlingRights(QChar c)
 {
 	Side side = (c.isUpper()) ? upperCaseSide() : upperCaseSide().opposite();
 	QChar ch = c.toLower();
-	QString rank = side == Side::White ? "1" : QString::number(height());
+	QString rank = side == Side::Red ? "1" : QString::number(height());
 
 	if (ch >= 'a' && ch <= 'h')
 	{
@@ -257,7 +257,7 @@ QString SeirawanBoard::sanMoveString(const Move& move)
 	int source = move.sourceSquare();
 	Square srcSq = chessSquare(source);
 	int target = move.targetSquare();
-	int baserank = (side == Side::White) ? 0 : height() - 1;
+	int baserank = (side == Side::Red) ? 0 : height() - 1;
 
 	// promotion on own baserank is channeling move
 	if (srcSq.rank() == baserank && promotion != Piece::NoPiece)

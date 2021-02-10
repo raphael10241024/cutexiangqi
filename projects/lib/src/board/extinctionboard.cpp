@@ -46,7 +46,7 @@ QString ExtinctionBoard::defaultFenString() const
 
 bool ExtinctionBoard::kingsCountAssertion(int, int) const
 {
-	return extinctPiece(Side::White).isEmpty()
+	return extinctPiece(Side::Red).isEmpty()
 	||     extinctPiece(Side::Black).isEmpty();
 }
 

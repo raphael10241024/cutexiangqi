@@ -22,6 +22,7 @@ SOURCES += $$PWD/board.cpp \
     $$PWD/knightmateboard.cpp \
     $$PWD/seirawanboard.cpp \
     $$PWD/twokingseachboard.cpp \
+    $$PWD/xiangqiboard.cpp \
     $$PWD/zobrist.cpp \
     $$PWD/westernzobrist.cpp \
     $$PWD/frcboard.cpp \
@@ -38,9 +39,6 @@ SOURCES += $$PWD/board.cpp \
     $$PWD/codrusboard.cpp \
     $$PWD/gothicboard.cpp \
     $$PWD/grandboard.cpp \
-    $$PWD/crazyhouseboard.cpp \
-    $$PWD/loopboard.cpp \
-    $$PWD/chessgiboard.cpp \
     $$PWD/pocketknightboard.cpp \
     $$PWD/chancellorboard.cpp \
     $$PWD/modernboard.cpp \
@@ -58,8 +56,6 @@ SOURCES += $$PWD/board.cpp \
     $$PWD/judkinsshogiboard.cpp \
     $$PWD/rifleboard.cpp \
     $$PWD/losalamosboard.cpp \
-    $$PWD/almostboard.cpp \
-    $$PWD/amazonboard.cpp \
     $$PWD/chigorinboard.cpp \
     $$PWD/hoppelpoppelboard.cpp \
     $$PWD/placementboard.cpp \
@@ -92,6 +88,7 @@ HEADERS += $$PWD/board.h \
     $$PWD/knightmateboard.h \
     $$PWD/seirawanboard.h \
     $$PWD/twokingseachboard.h \
+    $$PWD/xiangqiboard.h \
     $$PWD/zobrist.h \
     $$PWD/westernzobrist.h \
     $$PWD/frcboard.h \
@@ -108,9 +105,6 @@ HEADERS += $$PWD/board.h \
     $$PWD/codrusboard.h \
     $$PWD/gothicboard.h \
     $$PWD/grandboard.h \
-    $$PWD/crazyhouseboard.h \
-    $$PWD/loopboard.h \
-    $$PWD/chessgiboard.h \
     $$PWD/pocketknightboard.h \
     $$PWD/chancellorboard.h \
     $$PWD/modernboard.h \
@@ -128,8 +122,6 @@ HEADERS += $$PWD/board.h \
     $$PWD/judkinsshogiboard.h \
     $$PWD/rifleboard.h \
     $$PWD/losalamosboard.h \
-    $$PWD/almostboard.h \
-    $$PWD/amazonboard.h \
     $$PWD/chigorinboard.h \
     $$PWD/hoppelpoppelboard.h \
     $$PWD/placementboard.h \

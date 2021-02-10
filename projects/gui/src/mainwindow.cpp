@@ -363,7 +363,7 @@ void MainWindow::createDockWindows()
 	// Players' eval widgets
 	auto whiteEvalDock = new QDockWidget(tr("White's evaluation"), this);
 	whiteEvalDock->setObjectName("WhiteEvalDock");
-	whiteEvalDock->setWidget(m_evalWidgets[Chess::Side::White]);
+	whiteEvalDock->setWidget(m_evalWidgets[Chess::Side::Red]);
 	addDockWidget(Qt::RightDockWidgetArea, whiteEvalDock);
 	auto blackEvalDock = new QDockWidget(tr("Black's evaluation"), this);
 	blackEvalDock->setObjectName("BlackEvalDock");
@@ -514,7 +514,7 @@ void MainWindow::setCurrentGame(const TabData& gameData)
 		{
 			disconnect(player, nullptr, m_engineDebugLog, nullptr);
 			disconnect(player, nullptr,
-			           m_gameViewer->chessClock(Chess::Side::White), nullptr);
+			           m_gameViewer->chessClock(Chess::Side::Red), nullptr);
 			disconnect(player, nullptr,
 			           m_gameViewer->chessClock(Chess::Side::Black), nullptr);
 		}
@@ -722,7 +722,7 @@ void MainWindow::newGame()
 	}
 
 	PlayerBuilder* builders[2] = {
-		dlg.createPlayerBuilder(Chess::Side::White),
+		dlg.createPlayerBuilder(Chess::Side::Red),
 		dlg.createPlayerBuilder(Chess::Side::Black)
 	};
 
@@ -735,7 +735,7 @@ void MainWindow::newGame()
 	connect(game, SIGNAL(startFailed(ChessGame*)),
 		this, SLOT(onGameStartFailed(ChessGame*)));
 	CuteChessApplication::instance()->gameManager()->newGame(game,
-		builders[Chess::Side::White], builders[Chess::Side::Black]);
+		builders[Chess::Side::Red], builders[Chess::Side::Black]);
 }
 
 void MainWindow::onGameStartFailed(ChessGame* game)
@@ -904,13 +904,13 @@ QString MainWindow::genericTitle(const TabData& gameData) const
 	Chess::Result result;
 	if (gameData.m_game)
 	{
-		white = gameData.m_game->player(Chess::Side::White)->name();
+		white = gameData.m_game->player(Chess::Side::Red)->name();
 		black = gameData.m_game->player(Chess::Side::Black)->name();
 		result = gameData.m_game->result();
 	}
 	else
 	{
-		white = gameData.m_pgn->playerName(Chess::Side::White);
+		white = gameData.m_pgn->playerName(Chess::Side::Red);
 		black = gameData.m_pgn->playerName(Chess::Side::Black);
 		result = gameData.m_pgn->result();
 	}
@@ -924,7 +924,7 @@ QString MainWindow::genericTitle(const TabData& gameData) const
 
 void MainWindow::updateMenus()
 {
-	QPointer<ChessPlayer> white = m_players[Chess::Side::White];
+	QPointer<ChessPlayer> white = m_players[Chess::Side::Red];
 	QPointer<ChessPlayer> black = m_players[Chess::Side::Black];
 	bool isHumanGame =  (!white.isNull() && white->isHuman())
 			 || (!black.isNull() && black->isHuman());
@@ -1152,7 +1152,7 @@ void MainWindow::adjudicateDraw()
 
 void MainWindow::adjudicateWhiteWin()
 {
-	adjudicateGame(Chess::Side::White);
+	adjudicateGame(Chess::Side::Red);
 }
 
 void MainWindow::adjudicateBlackWin()

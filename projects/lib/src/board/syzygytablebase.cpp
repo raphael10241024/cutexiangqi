@@ -80,7 +80,7 @@ Chess::Result SyzygyTablebase::result(const Chess::Side& side,
 	if (pieces.size() > s_pieces)
 		return Chess::Result();
 
-	bool wtm = (side == Chess::Side::White);
+	bool wtm = (side == Chess::Side::Red);
 	unsigned ep = (tbSquare(enpassantSq) < 0? 0: tbSquare(enpassantSq));
 	uint64_t white = 0, black = 0;
 	uint64_t kings = 0, queens = 0, rooks = 0, bishops = 0, knights = 0,
@@ -92,7 +92,7 @@ Chess::Result SyzygyTablebase::result(const Chess::Side& side,
 			continue;
 		unsigned sq = tbSquare(item.first);
 		uint64_t bit = ((uint64_t)1 << sq);
-		if (item.second.side() == Chess::Side::White)
+		if (item.second.side() == Chess::Side::Red)
 			white |= bit;
 		else
 			black |= bit;
@@ -122,7 +122,7 @@ Chess::Result SyzygyTablebase::result(const Chess::Side& side,
 	if (result == TB_RESULT_FAILED)
 		return Chess::Result();
 	if (result == TB_RESULT_CHECKMATE)
-		winner = (wtm? Chess::Side::Black: Chess::Side::White);
+		winner = (wtm? Chess::Side::Black: Chess::Side::Red);
 	else if (result == TB_RESULT_STALEMATE)
 		winner = Chess::Side::NoSide;
 	else
@@ -134,7 +134,7 @@ Chess::Result SyzygyTablebase::result(const Chess::Side& side,
 				break;
 			// Fallthrough
 		case TB_LOSS:
-			winner = (wtm? Chess::Side::Black: Chess::Side::White);
+			winner = (wtm? Chess::Side::Black: Chess::Side::Red);
 			break;
 		case TB_DRAW:
 			break;
@@ -143,7 +143,7 @@ Chess::Result SyzygyTablebase::result(const Chess::Side& side,
 				break;
 			// Fallthrough
 		case TB_WIN:
-			winner = (wtm? Chess::Side::White: Chess::Side::Black);
+			winner = (wtm? Chess::Side::Red: Chess::Side::Black);
 			break;
 		}
 	}

@@ -721,7 +721,7 @@ int main(int argc, char* argv[])
 	{
 		if (arg == "-v" || arg == "--version" || arg == "-version")
 		{
-			out << "cutechess-cli " << CUTECHESS_CLI_VERSION << endl;
+                        out << "cutechess-cli " << CUTEXIANGQI_CLI_VERSION << endl;
 			out << "Using Qt version " << qVersion() << endl;
 			out << "Running on " << QSysInfo::prettyProductName();
 			out << "/" << QSysInfo::currentCpuArchitecture() << endl << endl;

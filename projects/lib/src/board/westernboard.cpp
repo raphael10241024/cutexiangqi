@@ -100,16 +100,16 @@ void WesternBoard::vInitialize()
 
 	m_arwidth = width() + 2;
 
-	m_castlingRights.rookSquare[Side::White][QueenSide] = 0;
-	m_castlingRights.rookSquare[Side::White][KingSide] = 0;
+	m_castlingRights.rookSquare[Side::Red][QueenSide] = 0;
+	m_castlingRights.rookSquare[Side::Red][KingSide] = 0;
 	m_castlingRights.rookSquare[Side::Black][QueenSide] = 0;
 	m_castlingRights.rookSquare[Side::Black][KingSide] = 0;
 
-	m_kingSquare[Side::White] = 0;
+	m_kingSquare[Side::Red] = 0;
 	m_kingSquare[Side::Black] = 0;
 
-	m_castleTarget[Side::White][QueenSide] = (height() + 1) * m_arwidth + 1 + castlingFile(QueenSide);
-	m_castleTarget[Side::White][KingSide] = (height() + 1) * m_arwidth + 1 + castlingFile(KingSide);
+	m_castleTarget[Side::Red][QueenSide] = (height() + 1) * m_arwidth + 1 + castlingFile(QueenSide);
+	m_castleTarget[Side::Red][KingSide] = (height() + 1) * m_arwidth + 1 + castlingFile(KingSide);
 	m_castleTarget[Side::Black][QueenSide] = 2 * m_arwidth + 1 + castlingFile(QueenSide);
 	m_castleTarget[Side::Black][KingSide] = 2 * m_arwidth + 1 + castlingFile(KingSide);
 
@@ -378,7 +378,7 @@ Move WesternBoard::moveFromSanString(const QString& str)
 		it++; // ignore character
 	// Piece type
 	Piece piece = pieceFromSymbol(*it);
-	if (piece.side() != Side::White)
+	if (piece.side() != Side::Red)
 		piece = Piece::NoPiece;
 	else
 		piece.setSide(side);
@@ -526,7 +526,7 @@ QString WesternBoard::castlingRightsString(FenNotation notation) const
 {
 	QString str;
 
-	for (int side = Side::White; side <= Side::Black; side++)
+	for (int side = Side::Red; side <= Side::Black; side++)
 	{
 		for (int cside = KingSide; cside >= QueenSide; cside--)
 		{
@@ -669,7 +669,7 @@ bool WesternBoard::parseCastlingRights(QChar c)
 
 		// Get the rook's source square
 		int rookSq;
-		if (side == Side::White)
+		if (side == Side::Red)
 			rookSq = (height() + 1) * m_arwidth + 1 + file;
 		else
 			rookSq = 2 * m_arwidth + 1 + file;
@@ -710,7 +710,7 @@ bool WesternBoard::vSetFenString(const QStringList& fen)
 			kingCount[tmp.side()]++;
 		}
 	}
-	if (!kingsCountAssertion(kingCount[Side::White],
+	if (!kingsCountAssertion(kingCount[Side::Red],
 				 kingCount[Side::Black]))
 		return false;
 
@@ -724,8 +724,8 @@ bool WesternBoard::vSetFenString(const QStringList& fen)
 		return false;
 
 	// Castling rights
-	m_castlingRights.rookSquare[Side::White][QueenSide] = 0;
-	m_castlingRights.rookSquare[Side::White][KingSide] = 0;
+	m_castlingRights.rookSquare[Side::Red][QueenSide] = 0;
+	m_castlingRights.rookSquare[Side::Red][KingSide] = 0;
 	m_castlingRights.rookSquare[Side::Black][QueenSide] = 0;
 	m_castlingRights.rookSquare[Side::Black][KingSide] = 0;
 
@@ -745,7 +745,7 @@ bool WesternBoard::vSetFenString(const QStringList& fen)
 	// En-passant square
 	m_enpassantSquare = 0;
 	Side side(sideToMove());
-	m_sign = (side == Side::White) ? 1 : -1;
+	m_sign = (side == Side::Red) ? 1 : -1;
 
 	if (m_hasEnPassantCaptures && *token != "-")
 	{
@@ -1115,7 +1115,7 @@ bool WesternBoard::inCheck(Side side, int square) const
 	}
 
 	// Pawn attacks
-	int sign = (side == Side::White) ? 1 : -1;
+	int sign = (side == Side::Red) ? 1 : -1;
 
 	for (const PawnStep& pStep: m_pawnSteps)
 	{

@@ -12,19 +12,19 @@ QMAKE_EXTRA_TARGETS += doc-api
 
 # Documentation in HTML format
 doc-html.commands = \
-    mandoc -Thtml -Ostyle=man-style.css docs/cutechess-cli.6 > docs/cutechess-cli.6.html; \
+    mandoc -Thtml -Ostyle=man-style.css docs/cutexiangqi-cli.6 > docs/cutexiangqi-cli.6.html; \
     mandoc -Thtml -Ostyle=man-style.css docs/engines.json.5 > docs/engines.json.5.html
 QMAKE_EXTRA_TARGETS += doc-html
-QMAKE_DISTCLEAN += docs/cutechess-cli.6.html
+QMAKE_DISTCLEAN += docs/cutexiangqi-cli.6.html
 QMAKE_DISTCLEAN += docs/engines.json.5.html
 
 # Documentation in text format
 doc-txt.commands = \
-    mandoc -Tascii docs/cutechess-cli.6 | col -b > docs/cutechess-cli.6.txt; \
+    mandoc -Tascii docs/cutexiangqi-cli.6 | col -b > docs/cutexiangqi-cli.6.txt; \
     mandoc -Tascii docs/engines.json.5 | col -b > docs/engines.json.5.txt
 QMAKE_EXTRA_TARGETS += doc-txt
-QMAKE_DISTCLEAN += docs/cutechess-cli.6.txt
+QMAKE_DISTCLEAN += docs/cutexiangqi-cli.6.txt
 QMAKE_DISTCLEAN += docs/engines.json.5.txt
 
 TRANSLATIONS += \
-    translations/cutechess_zh_CN.ts
+    translations/cutexiangqi_zh_CN.ts

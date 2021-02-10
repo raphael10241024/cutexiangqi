@@ -146,11 +146,11 @@ QString CaparandomBoard::defaultFenString() const
 
 	// White pawns
 	for (int i = 0; i < width(); i++)
-		fen += pieceSymbol(Piece(Side::White, Pawn));
+		fen += pieceSymbol(Piece(Side::Red, Pawn));
 	fen += '/';
 	// White pieces
 	for (int pieceType : qAsConst(pieces))
-		fen += pieceSymbol(Piece(Side::White, pieceType));
+		fen += pieceSymbol(Piece(Side::Red, pieceType));
 
 	// Side to move, castling rights, enpassant square, etc.
 	fen += " w KQkq - 0 1";

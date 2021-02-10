@@ -236,7 +236,7 @@ void UciEngine::startThinking()
 	const TimeControl* whiteTc = nullptr;
 	const TimeControl* blackTc = nullptr;
 	const TimeControl* myTc = timeControl();
-	if (side() == Chess::Side::White)
+    if (side() == Chess::Side::Red)
 	{
 		whiteTc = myTc;
 		blackTc = opponent()->timeControl();

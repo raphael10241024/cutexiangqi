@@ -116,7 +116,7 @@ Result DobutsuShogiBoard::result()
 	// test whether opponent's Lion reached farthest rank
 	int arwidth = width() + 2;
 	int rank = kingSquare / arwidth - 2;
-	int flag = (opp == Side::White) ? 0 : height() - 1;
+	int flag = (opp == Side::Red) ? 0 : height() - 1;
 	if (rank == flag && !inCheck(opp))
 	{
 		str = tr("Lion reached farthest rank");

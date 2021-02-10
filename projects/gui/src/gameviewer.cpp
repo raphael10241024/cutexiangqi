@@ -177,7 +177,7 @@ void GameViewer::setGame(ChessGame* game)
 		    && m_game->playerToMove()->isHuman()
 		    && m_game->playerToWait()->isHuman();
 
-	if (m_humanGame && m_game->playerToMove() != m_game->player(Chess::Side::White))
+	if (m_humanGame && m_game->playerToMove() != m_game->player(Chess::Side::Red))
 		autoFlip();
 }
 

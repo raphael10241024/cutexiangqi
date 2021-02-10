@@ -38,8 +38,8 @@ QString KingOfTheHillBoard::variant() const
 
 Result KingOfTheHillBoard::result()
 {
-	if (kingInCenter(Side::White))
-		return Result(Result::Win, Side::White,
+	if (kingInCenter(Side::Red))
+		return Result(Result::Win, Side::Red,
 			      tr("White wins with king in the center"));
 	if (kingInCenter(Side::Black))
 		return Result(Result::Win, Side::Black,

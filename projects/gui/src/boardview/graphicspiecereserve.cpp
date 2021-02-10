@@ -147,7 +147,7 @@ QPointF GraphicsPieceReserve::piecePos(Chess::Side side, int index) const
 {
 	QPointF point;
 
-	if (side == Chess::Side::White)
+	if (side == Chess::Side::Red)
 		point.setX(-m_tileHeight / 2);
 	else
 		point.setX(m_rect.right() - m_tileHeight / 2);
@@ -162,7 +162,7 @@ QRectF GraphicsPieceReserve::textRect(Chess::Side side, int index) const
 {
 	QRectF rect;
 
-	if (side == Chess::Side::White)
+	if (side == Chess::Side::Red)
 		rect.setLeft(m_rect.left());
 	else
 		rect.setLeft(0);

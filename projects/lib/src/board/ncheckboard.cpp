@@ -48,13 +48,13 @@ QString NCheckBoard::defaultFenString() const
 
 void NCheckBoard::vInitialize()
 {
-	m_checksToWin[Side::White] = m_checksToWin[Side::Black] = checkLimit();
+	m_checksToWin[Side::Red] = m_checksToWin[Side::Black] = checkLimit();
 	StandardBoard::vInitialize();
 }
 
 void NCheckBoard::updateCheckCounters(Side side, int d = -1)
 {
-	Q_ASSERT(m_checksToWin[Side::White] >=0);
+	Q_ASSERT(m_checksToWin[Side::Red] >=0);
 	Q_ASSERT(m_checksToWin[Side::Black] >=0);
 	Q_ASSERT(side != Side::NoSide);
 
@@ -96,14 +96,14 @@ inline int NCheckBoard::checkLimit() const
 
 void NCheckBoard::setChecksToWin(int whiteCount, int blackCount)
 {
-	m_checksToWin[Side::White] = qBound(0, whiteCount, checkLimit());
+	m_checksToWin[Side::Red] = qBound(0, whiteCount, checkLimit());
 	m_checksToWin[Side::Black] = qBound(0, blackCount, checkLimit());
 }
 
 int NCheckBoard::checksToWin(Side side) const
 {
-	if (side == Side::White)
-		return m_checksToWin[Side::White];
+	if (side == Side::Red)
+		return m_checksToWin[Side::Red];
 	if (side == Side::Black)
 		return m_checksToWin[Side::Black];
 	return -1;
@@ -122,7 +122,7 @@ QString NCheckBoard::vFenIncludeString(Board::FenNotation notation) const
 	Q_UNUSED(notation);
 
 	QString fen = QString(" %1+%2")
-	.arg(m_checksToWin[Side::White])
+	.arg(m_checksToWin[Side::Red])
 	.arg(m_checksToWin[Side::Black]);
 
 	return fen;

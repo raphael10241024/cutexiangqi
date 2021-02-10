@@ -192,7 +192,7 @@ void ChessGame::stop(bool emitMoveChanged)
 		emit moveChanged(plies - 1, md.move, md.moveString, md.comment);
 	}
 
-	m_player[Chess::Side::White]->endGame(m_result);
+    m_player[Chess::Side::Red]->endGame(m_result);
 	m_player[Chess::Side::Black]->endGame(m_result);
 
 	connect(this, SIGNAL(playersReady()), this, SLOT(finish()), Qt::QueuedConnection);
@@ -353,7 +353,7 @@ void ChessGame::onResultClaim(const Chess::Result& result)
 	{
 		// The engine may not be properly started so we have to
 		// figure out the player's side this way
-		Chess::Side side(Chess::Side::White);
+        Chess::Side side(Chess::Side::Red);
 		if (m_player[side] != sender)
 			side = Chess::Side::Black;
 		m_result = Chess::Result(result.type(), side.opposite());
@@ -426,10 +426,10 @@ void ChessGame::setStartingFen(const QString& fen)
 
 void ChessGame::setTimeControl(const TimeControl& timeControl, Chess::Side side)
 {
-	if (side != Chess::Side::White)
+    if (side != Chess::Side::Red)
 		m_timeControl[Chess::Side::Black] = timeControl;
 	if (side != Chess::Side::Black)
-		m_timeControl[Chess::Side::White] = timeControl;
+        m_timeControl[Chess::Side::Red] = timeControl;
 }
 
 void ChessGame::setMoves(const QVector<Chess::Move>& moves)
@@ -471,7 +471,7 @@ void ChessGame::setOpeningBook(const OpeningBook* book,
 
 	if (side.isNull())
 	{
-		setOpeningBook(book, Chess::Side::White, depth);
+        setOpeningBook(book, Chess::Side::Red, depth);
 		setOpeningBook(book, Chess::Side::Black, depth);
 	}
 	else
@@ -488,7 +488,7 @@ void ChessGame::setAdjudicator(const GameAdjudicator& adjudicator)
 
 void ChessGame::generateOpening()
 {
-	if (m_book[Chess::Side::White] == nullptr || m_book[Chess::Side::Black] == nullptr)
+    if (m_book[Chess::Side::Red] == nullptr || m_book[Chess::Side::Black] == nullptr)
 		return;
 	if (!resetBoard())
 		return;
@@ -677,15 +677,15 @@ void ChessGame::initializePgn()
 	m_pgn->setVariant(m_board->variant());
 	m_pgn->setStartingFenString(m_board->startingSide(), m_startingFen);
 	m_pgn->setDate(QDate::currentDate());
-	m_pgn->setPlayerName(Chess::Side::White, m_player[Chess::Side::White]->name());
+    m_pgn->setPlayerName(Chess::Side::Red, m_player[Chess::Side::Red]->name());
 	m_pgn->setPlayerName(Chess::Side::Black, m_player[Chess::Side::Black]->name());
 	m_pgn->setResult(m_result);
 
-	if (m_timeControl[Chess::Side::White] == m_timeControl[Chess::Side::Black])
+    if (m_timeControl[Chess::Side::Red] == m_timeControl[Chess::Side::Black])
 		m_pgn->setTag("TimeControl", m_timeControl[0].toString());
 	else
 	{
-		m_pgn->setTag("WhiteTimeControl", m_timeControl[Chess::Side::White].toString());
+        m_pgn->setTag("WhiteTimeControl", m_timeControl[Chess::Side::Red].toString());
 		m_pgn->setTag("BlackTimeControl", m_timeControl[Chess::Side::Black].toString());
 	}
 }
@@ -723,7 +723,7 @@ void ChessGame::startGame()
 		}
 	}
 
-	m_pgn->setPlayerName(Chess::Side::White, m_player[Chess::Side::White]->name());
+    m_pgn->setPlayerName(Chess::Side::Red, m_player[Chess::Side::Red]->name());
 	m_pgn->setPlayerName(Chess::Side::Black, m_player[Chess::Side::Black]->name());
 
 	emit started(this);

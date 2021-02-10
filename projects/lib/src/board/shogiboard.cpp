@@ -165,15 +165,15 @@ bool ShogiBoard::hasImpassePointRule() const
 
 inline void rotateAndStoreOffsets(QVarLengthArray<int> a[2])
 {
-	a[Side::Black].resize(a[Side::White].size());
-	for (int i = 0; i < a[Side::White].count(); i++)
-		a[Side::Black][i] = -a[Side::White][i];
+	a[Side::Black].resize(a[Side::Red].size());
+	for (int i = 0; i < a[Side::Red].count(); i++)
+		a[Side::Black][i] = -a[Side::Red][i];
 }
 
 void ShogiBoard::vInitialize()
 {
 	// White as first player: Sente 先手.
-	m_kingSquare[Side::White] = 0;
+	m_kingSquare[Side::Red] = 0;
 	// Black as second player: Gote 後手.
 	m_kingSquare[Side::Black] = 0;
 
@@ -204,33 +204,33 @@ void ShogiBoard::vInitialize()
 	m_rookOffsets[2] = 1;
 	m_rookOffsets[3] = arwidth;
 
-	m_lanceOffsets[Side::White].resize(1);
-	m_lanceOffsets[Side::White][0] = -arwidth;
+	m_lanceOffsets[Side::Red].resize(1);
+	m_lanceOffsets[Side::Red][0] = -arwidth;
 	m_lanceOffsets[Side::Black].resize(1);
 	m_lanceOffsets[Side::Black][0] = arwidth;
 
-	m_knightOffsets[Side::White].resize(2);
-	m_knightOffsets[Side::White][0] = -2 * arwidth - 1;
-	m_knightOffsets[Side::White][1] = -2 * arwidth + 1;
+	m_knightOffsets[Side::Red].resize(2);
+	m_knightOffsets[Side::Red][0] = -2 * arwidth - 1;
+	m_knightOffsets[Side::Red][1] = -2 * arwidth + 1;
 
 	rotateAndStoreOffsets(m_knightOffsets);
 
-	m_silverGeneralOffsets[Side::White].resize(5);
-	m_silverGeneralOffsets[Side::White][0] = -arwidth - 1;
-	m_silverGeneralOffsets[Side::White][1] = -arwidth + 1;
-	m_silverGeneralOffsets[Side::White][2] = arwidth - 1;
-	m_silverGeneralOffsets[Side::White][3] = arwidth + 1;
-	m_silverGeneralOffsets[Side::White][4] = -arwidth;
+	m_silverGeneralOffsets[Side::Red].resize(5);
+	m_silverGeneralOffsets[Side::Red][0] = -arwidth - 1;
+	m_silverGeneralOffsets[Side::Red][1] = -arwidth + 1;
+	m_silverGeneralOffsets[Side::Red][2] = arwidth - 1;
+	m_silverGeneralOffsets[Side::Red][3] = arwidth + 1;
+	m_silverGeneralOffsets[Side::Red][4] = -arwidth;
 
 	rotateAndStoreOffsets(m_silverGeneralOffsets);
 
-	m_goldGeneralOffsets[Side::White].resize(6);
-	m_goldGeneralOffsets[Side::White][0] = -arwidth - 1;
-	m_goldGeneralOffsets[Side::White][1] = -arwidth + 1;
-	m_goldGeneralOffsets[Side::White][2] = -arwidth;
-	m_goldGeneralOffsets[Side::White][3] = 1;
-	m_goldGeneralOffsets[Side::White][4] = -1;
-	m_goldGeneralOffsets[Side::White][5] = arwidth;
+	m_goldGeneralOffsets[Side::Red].resize(6);
+	m_goldGeneralOffsets[Side::Red][0] = -arwidth - 1;
+	m_goldGeneralOffsets[Side::Red][1] = -arwidth + 1;
+	m_goldGeneralOffsets[Side::Red][2] = -arwidth;
+	m_goldGeneralOffsets[Side::Red][3] = 1;
+	m_goldGeneralOffsets[Side::Red][4] = -1;
+	m_goldGeneralOffsets[Side::Red][5] = arwidth;
 
 	rotateAndStoreOffsets(m_goldGeneralOffsets);
 
@@ -258,7 +258,7 @@ bool ShogiBoard::vSetFenString(const QStringList& fen)
 		return false;
 
 	m_history.clear();
-	m_kingSquare[Side::White] = 0;
+	m_kingSquare[Side::Red] = 0;
 	m_kingSquare[Side::Black] = 0;
 
 	QStringList::const_iterator token = fen.begin();
@@ -290,7 +290,7 @@ bool ShogiBoard::vSetFenString(const QStringList& fen)
 		if (piece.type() == King)
 			m_kingSquare[piece.side()] = sq;
 	}
-	if (m_kingSquare[Side::White] == 0
+	if (m_kingSquare[Side::Red] == 0
 	||  m_kingSquare[Side::Black] == 0)
 		return false;
 
@@ -450,7 +450,7 @@ Move ShogiBoard::moveFromSanString(const QString& str)
 	// Piece type
 	Piece piece = (*it != '+') ? pieceFromSymbol(*it)
 				   : pieceFromSymbol('+' + *++it);
-	if (piece.side() != Side::White)
+	if (piece.side() != Side::Red)
 		piece = Piece::NoPiece;
 	else
 		piece.setSide(side);
@@ -677,7 +677,7 @@ bool ShogiBoard::rankIsAllowed(int pieceType, int square) const
 		return true;
 
 	int rank = chessSquare(square).rank();
-	int rrank = (sideToMove() == Side::White) ? rank : height() - 1 - rank;
+	int rrank = (sideToMove() == Side::Red) ? rank : height() - 1 - rank;
 	int distance = height() - rrank;
 
 	return distance > 2 || (distance > 1 && pieceType != Knight);
@@ -708,7 +708,7 @@ bool ShogiBoard::inPromotionZone(int square) const
 {
 	Square sq = chessSquare(square);
 	int rank = sq.rank();
-	int rrank = (sideToMove() == Side::White) ? rank : height() - 1 - rank;
+	int rrank = (sideToMove() == Side::Red) ? rank : height() - 1 - rank;
 
 	return rrank >= m_promotionRank;
 }
@@ -795,7 +795,7 @@ bool ShogiBoard::ranksAreAllowed() const
 		Piece piece = pieceAt(i);
 		int type = piece.type();
 		if ((type == Pawn || type == Lance || type == Knight)
-		&&  piece.side() == Side::White)
+		&&  piece.side() == Side::Red)
 			return false;
 
 		piece = pieceAt(arraySize() - 1 - i);
@@ -809,7 +809,7 @@ bool ShogiBoard::ranksAreAllowed() const
 	for (int i = m_minIndex; i < m_minIndex + width(); i++)
 	{
 		Piece piece = pieceAt(i + arwidth);
-		if (piece == Piece(Side::White, Knight))
+		if (piece == Piece(Side::Red, Knight))
 			return false;
 
 		piece = pieceAt(arraySize() - 1 - i - arwidth);
@@ -892,7 +892,7 @@ Result ShogiBoard::impassePointRule(int points, int pieces) const
 
 	if (points > 27 && pieces >= 10)
 	{
-		QString winStr = side == Side::White ? "Sente" : "Gote";
+		QString winStr = side == Side::Red ? "Sente" : "Gote";
 		QString str = tr("Impasse: %1 wins by 27-point rule").arg(winStr);
 		return Result(Result::Win, side, str);
 	}
@@ -948,7 +948,7 @@ Result ShogiBoard::result()
 	if (!canMove())
 	{
 		Side winner = side.opposite();
-		QString winStr = winner == Side::White ? "Sente" : "Gote";
+		QString winStr = winner == Side::Red ? "Sente" : "Gote";
 		if (inCheck(side))
 			str = tr("%1 mates").arg(winStr);
 		else

@@ -1,9 +1,9 @@
 # main executables
-projects/gui/cutechess
-projects/cli/cutechess-cli
-cutechess.app/
-cutechess.exe
-cutechess-cli.exe
+projects/gui/cutexiangqi
+projects/cli/cutexiangqi-cli
+cutexiangqi.app/
+cutexiangqi.exe
+cutexiangqi-cli.exe
 
 # test executables
 tst_board
